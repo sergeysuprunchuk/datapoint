@@ -117,7 +117,13 @@ type Table struct {
 }
 
 func (db *DB) tableList(ctx context.Context, where sq.Sqlizer) ([]*Table, error) {
-	rows, err := db.db.B.Select(
+	err := db.Check()
+	if err != nil {
+		return nil, err
+	}
+
+	var rows *sql.Rows
+	if rows, err = db.db.B.Select(
 		"c.table_name",
 		"c.column_name",
 		"c.data_type",
@@ -133,8 +139,7 @@ func (db *DB) tableList(ctx context.Context, where sq.Sqlizer) ([]*Table, error)
 		Where("c.table_schema = 'public'").
 		Where(where).
 		OrderBy("c.table_name", "c.ordinal_position").
-		QueryContext(ctx)
-	if err != nil {
+		QueryContext(ctx); err != nil {
 		return nil, err
 	}
 	defer func() { _ = rows.Close() }()
@@ -191,4 +196,55 @@ func (db *DB) TableByName(ctx context.Context, name string) (*Table, error) {
 	}
 
 	return tableList[0], nil
+}
+
+type Function struct {
+	Name     string
+	TypeList []string //nil == any
+}
+
+func (db *DB) FunctionList(ctx context.Context) ([]*Function, error) {
+	err := db.Check()
+	if err != nil {
+		return nil, err
+	}
+
+	var rows *sql.Rows
+	if rows, err = db.db.B.
+		Select("routine_name", "p.data_type").
+		From("information_schema.routines").
+		Join("information_schema.parameters p USING (specific_name)").
+		Where(sq.Eq{"routine_name": []string{"avg", "count", "max", "min", "sum"}}).
+		OrderBy("routine_name").
+		QueryContext(ctx); err != nil {
+		return nil, err
+	}
+	defer func() { _ = rows.Close() }()
+
+	const anyType = "\"any\""
+
+	var (
+		functionList []*Function
+		lastF        *Function
+	)
+
+	for rows.Next() {
+		var f, t string
+
+		if err = rows.Scan(&f, &t); err != nil {
+			return nil, err
+		}
+
+		if lastF == nil || lastF.Name != f {
+			newF := &Function{Name: f}
+			lastF = newF
+			functionList = append(functionList, newF)
+		}
+
+		if t != anyType {
+			lastF.TypeList = append(lastF.TypeList, t)
+		}
+	}
+
+	return functionList, nil
 }
