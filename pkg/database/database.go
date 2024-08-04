@@ -59,9 +59,13 @@ func (db *Database) Close() {
 	_ = db.DB.Close()
 }
 
-type handler func(context.Context) error
+type TxHandler func(context.Context) error
 
-func (db *Database) ReadCommitted(ctx context.Context, h handler) error {
+type TxManager interface {
+	ReadCommitted(ctx context.Context, h TxHandler) error
+}
+
+func (db *Database) ReadCommitted(ctx context.Context, h TxHandler) error {
 	tx, ok := ctx.Value(txKey).(*sql.Tx)
 	if ok {
 		return h(ctx)

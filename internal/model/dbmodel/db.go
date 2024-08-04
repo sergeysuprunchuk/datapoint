@@ -21,7 +21,7 @@ func New(info Info) (*DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &DB{ID: uuid.NewString(), Info: info, db: db}, err
+	return &DB{ID: uuid.NewString(), Info: info, db: db}, nil
 }
 
 func (db *DB) Open() error {
