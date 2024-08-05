@@ -1,0 +1,9 @@
+http:
+  addr: ":2020"
+
+db:
+  driver: "sqlite3"
+
+logger:
+  production: False
+  disable_stacktrace: False

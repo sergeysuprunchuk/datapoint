@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2d450db-0fa2-4528-b552-5d3a36668c20" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/converter/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/dbcontroller/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/model/db.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/slices/slices.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controller/http/controller.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migration/migration.go" beforeDir="false" afterPath="$PROJECT_DIR$/migration/migration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/logger/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/logger/logger.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
