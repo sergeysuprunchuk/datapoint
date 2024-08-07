@@ -7,3 +7,15 @@ func Map[T, E any](list []T, f func(T) E) []E {
 	}
 	return newList
 }
+
+func Unique[T comparable](s ...[]T) []T {
+	result, dict := make([]T, 0), make(map[T]struct{})
+	for _, i := range s {
+		for _, j := range i {
+			if _, ok := dict[j]; !ok {
+				result = append(result, j)
+			}
+		}
+	}
+	return result
+}
