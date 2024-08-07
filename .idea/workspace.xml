@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4e76f5b-2c6a-4372-8b6f-28653206658c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/internal/model/querymodel/query.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/model/querymodel/query_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/queryservice/query.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/slices/slices.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/slices/slices.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/dbmodel/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/dbmodel/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/querymodel/query.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/querymodel/query.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/model/querymodel/query_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/model/querymodel/query_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2kJijuQxbHOP1ZMzJex5l6OJFGF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,6 +76,17 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

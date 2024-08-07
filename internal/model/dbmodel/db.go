@@ -248,3 +248,7 @@ func (db *DB) FunctionList(ctx context.Context) ([]*Function, error) {
 
 	return functionList, nil
 }
+
+func (db *DB) B() sq.StatementBuilderType {
+	return db.db.B
+}

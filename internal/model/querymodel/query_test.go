@@ -23,100 +23,102 @@ func TestBuildSelect(t *testing.T) {
 	tests := [...]test{
 		{
 			query: Query{
-				Type: Select,
-				Table: &Table{
-					TableKey: table.TableKey,
-					Next: []*Table{
-						{
-							TableKey: TableKey{Name: table.Name, Increment: 1},
-							Rule: &Rule{
-								Type: Join,
-								Conditions: []*Condition{{
-									Columns: [2]*Column{
-										{
-											Column:   dbmodel.Column{Name: "id"},
-											TableKey: table.TableKey,
-										},
-										{
-											Column:   dbmodel.Column{Name: "id"},
-											TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
-										},
-									},
-									Operator: Equal,
-								}},
-							},
-						},
-						{
-							TableKey: TableKey{Name: table.Name, Increment: 2},
-							Next: []*Table{
-								{
-									TableKey: TableKey{Name: table.Name, Increment: 3},
-									Rule: &Rule{
-										Type: Right,
-										Conditions: []*Condition{{
-											Columns: [2]*Column{
-												{
-													Column:   dbmodel.Column{Name: "id"},
-													TableKey: TableKey{Name: table.TableKey.Name, Increment: 2},
-												},
-												{
-													Column:   dbmodel.Column{Name: "id"},
-													TableKey: TableKey{Name: table.TableKey.Name, Increment: 3},
-												},
+				Info: Info{
+					Type: Select,
+					Table: &Table{
+						TableKey: table.TableKey,
+						Next: []*Table{
+							{
+								TableKey: TableKey{Name: table.Name, Increment: 1},
+								Rule: &Rule{
+									Type: Join,
+									Conditions: []*Condition{{
+										Columns: [2]*Column{
+											{
+												Column:   dbmodel.Column{Name: "id"},
+												TableKey: table.TableKey,
 											},
-											Operator: Equal,
-										}},
-									},
+											{
+												Column:   dbmodel.Column{Name: "id"},
+												TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
+											},
+										},
+										Operator: Equal,
+									}},
 								},
 							},
-							Rule: &Rule{
-								Type: Left,
-								Conditions: []*Condition{{
-									Columns: [2]*Column{
-										{
-											Column:   dbmodel.Column{Name: "id"},
-											TableKey: table.TableKey,
-										},
-										{
-											Column:   dbmodel.Column{Name: "id"},
-											TableKey: TableKey{Name: table.TableKey.Name, Increment: 2},
+							{
+								TableKey: TableKey{Name: table.Name, Increment: 2},
+								Next: []*Table{
+									{
+										TableKey: TableKey{Name: table.Name, Increment: 3},
+										Rule: &Rule{
+											Type: Right,
+											Conditions: []*Condition{{
+												Columns: [2]*Column{
+													{
+														Column:   dbmodel.Column{Name: "id"},
+														TableKey: TableKey{Name: table.TableKey.Name, Increment: 2},
+													},
+													{
+														Column:   dbmodel.Column{Name: "id"},
+														TableKey: TableKey{Name: table.TableKey.Name, Increment: 3},
+													},
+												},
+												Operator: Equal,
+											}},
 										},
 									},
-									Operator: Equal,
-								}},
+								},
+								Rule: &Rule{
+									Type: Left,
+									Conditions: []*Condition{{
+										Columns: [2]*Column{
+											{
+												Column:   dbmodel.Column{Name: "id"},
+												TableKey: table.TableKey,
+											},
+											{
+												Column:   dbmodel.Column{Name: "id"},
+												TableKey: TableKey{Name: table.TableKey.Name, Increment: 2},
+											},
+										},
+										Operator: Equal,
+									}},
+								},
 							},
 						},
 					},
-				},
-				Columns: []*Column{
-					{
-						TableKey: table.TableKey,
-						Column:   dbmodel.Column{Name: "id"},
+					Columns: []*Column{
+						{
+							TableKey: table.TableKey,
+							Column:   dbmodel.Column{Name: "id"},
+						},
+						{
+							TableKey: table.TableKey,
+							Column:   dbmodel.Column{Name: "name"},
+						},
+						{
+							TableKey: table.TableKey,
+							Column:   dbmodel.Column{Name: "age"},
+							Function: "sum",
+						},
+						{
+							TableKey: TableKey{Name: table.TableKey.Name, Increment: 3},
+							Column:   dbmodel.Column{Name: "age"},
+							Function: "avg",
+						},
+						{
+							TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
+							Column:   dbmodel.Column{Name: "id"},
+						},
 					},
-					{
-						TableKey: table.TableKey,
-						Column:   dbmodel.Column{Name: "name"},
-					},
-					{
-						TableKey: table.TableKey,
-						Column:   dbmodel.Column{Name: "age"},
-						Function: "sum",
-					},
-					{
-						TableKey: TableKey{Name: table.TableKey.Name, Increment: 3},
-						Column:   dbmodel.Column{Name: "age"},
-						Function: "avg",
-					},
-					{
-						TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
-						Column:   dbmodel.Column{Name: "id"},
-					},
-				},
-				OrderBy: []*Column{
-					{
-						Column:   dbmodel.Column{Name: "name"},
-						TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
-						Desc:     true,
+					OrderBy: []*Column{
+						{
+							Column:   dbmodel.Column{Name: "name"},
+							TableKey: TableKey{Name: table.TableKey.Name, Increment: 1},
+							Desc:     true,
+						},
 					},
 				},
 				b: b,
@@ -152,20 +154,22 @@ func TestBuildInsert(t *testing.T) {
 	tests := [...]test{
 		{
 			query: Query{
-				Type:  Insert,
-				Table: table,
-				Columns: []*Column{
-					{
-						Column: dbmodel.Column{Name: "id"},
-						Value:  "slvag",
-					},
-					{
-						Column: dbmodel.Column{Name: "name"},
-						Value:  "qtbbt",
-					},
-					{
-						Column: dbmodel.Column{Name: "age"},
-						Value:  70,
+				Info: Info{
+					Type:  Insert,
+					Table: table,
+					Columns: []*Column{
+						{
+							Column: dbmodel.Column{Name: "id"},
+							Value:  "slvag",
+						},
+						{
+							Column: dbmodel.Column{Name: "name"},
+							Value:  "qtbbt",
+						},
+						{
+							Column: dbmodel.Column{Name: "age"},
+							Value:  70,
+						},
 					},
 				},
 				b: b,
@@ -192,26 +196,28 @@ func TestBuildUpdate(t *testing.T) {
 	tests := [...]test{
 		{
 			query: Query{
-				Type:  Update,
-				Table: table,
-				Columns: []*Column{
-					{
-						Column: dbmodel.Column{Name: "name"},
-						Value:  "qtbbt",
+				Info: Info{
+					Type:  Update,
+					Table: table,
+					Columns: []*Column{
+						{
+							Column: dbmodel.Column{Name: "name"},
+							Value:  "qtbbt",
+						},
+						{
+							Column: dbmodel.Column{Name: "age"},
+							Value:  70,
+						},
 					},
-					{
-						Column: dbmodel.Column{Name: "age"},
-						Value:  70,
-					},
-				},
-				Where: []*Column{
-					{
-						Column: dbmodel.Column{Name: "id"},
-						Value:  "slvag",
-					},
-					{
-						Column: dbmodel.Column{Name: "name"},
-						Value:  "qtbbt",
+					Where: []*Column{
+						{
+							Column: dbmodel.Column{Name: "id"},
+							Value:  "slvag",
+						},
+						{
+							Column: dbmodel.Column{Name: "name"},
+							Value:  "qtbbt",
+						},
 					},
 				},
 				b: b,
@@ -238,12 +244,14 @@ func TestBuildDelete(t *testing.T) {
 	tests := [...]test{
 		{
 			query: Query{
-				Type:  Delete,
-				Table: table,
-				Where: []*Column{
-					{
-						Column: dbmodel.Column{Name: "id"},
-						Value:  "slvag",
+				Info: Info{
+					Type:  Delete,
+					Table: table,
+					Where: []*Column{
+						{
+							Column: dbmodel.Column{Name: "id"},
+							Value:  "slvag",
+						},
 					},
 				},
 				b: b,
@@ -253,16 +261,18 @@ func TestBuildDelete(t *testing.T) {
 		},
 		{
 			query: Query{
-				Type:  Delete,
-				Table: table,
-				Where: []*Column{
-					{
-						Column: dbmodel.Column{Name: "id"},
-						Value:  "slvag",
-					},
-					{
-						Column: dbmodel.Column{Name: "name"},
-						Value:  "qtbbt",
+				Info: Info{
+					Type:  Delete,
+					Table: table,
+					Where: []*Column{
+						{
+							Column: dbmodel.Column{Name: "id"},
+							Value:  "slvag",
+						},
+						{
+							Column: dbmodel.Column{Name: "name"},
+							Value:  "qtbbt",
+						},
 					},
 				},
 				b: b,

@@ -23,6 +23,11 @@ type Runner interface {
 }
 
 type Query struct {
+	Info
+	b sq.StatementBuilderType //с PlaceholderFormat, но без RunWith
+}
+
+type Info struct {
 	Type    string
 	Table   *Table
 	Columns []*Column
@@ -30,7 +35,6 @@ type Query struct {
 	Where   []*Column
 	Limit   uint64
 	Offset  uint64
-	b       sq.StatementBuilderType //с PlaceholderFormat, но без RunWith
 }
 
 func (q Query) Execute(ctx context.Context, runner Runner) (QueryResult, error) {
@@ -312,3 +316,10 @@ type Condition struct {
 }
 
 type QueryResult struct{ Data []map[string]any }
+
+func New(info Info, b sq.StatementBuilderType) Query {
+	return Query{
+		Info: info,
+		b:    b,
+	}
+}
